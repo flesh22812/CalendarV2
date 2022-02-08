@@ -16,8 +16,8 @@
     <string name="id">id</string>
     <string name="name">name</string>
     <string name="description">description</string>
-    <string name="date_start">date_start</string>
-    <string name="date_finish">date_finish</string>
+    <string name="date_start">dateStart</string>
+    <string name="date_finish">dateFinish</string>
     <string name="saved">Сохранено</string>
     <string name="day">Day</string>
     <string name="month">Month</string>
