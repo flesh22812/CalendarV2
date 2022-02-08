@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void refreshList() {
         events.clear();
-        RealmResults<Event> realmResults = realm.where(Event.class).between("dateStart", calendar.getTimeInMillis(), (calendar.getTimeInMillis() + 86400000)).findAll();
+        RealmResults<Event> realmResults = realm.where(Event.class).between(getString(R.string.date_start), calendar.getTimeInMillis(), (calendar.getTimeInMillis() + 86400000)).findAll();
         events.addAll(realmResults);
         realmAdapter.notifyDataSetChanged();
     }
@@ -160,9 +160,9 @@ public class MainActivity extends AppCompatActivity {
     private void onClickAdd() {
 
         Intent intent = new Intent(MainActivity.this, AddEventActivity.class);
-        intent.putExtra("Day", calendar.get(Calendar.DAY_OF_MONTH));
-        intent.putExtra("Month", calendar.get(Calendar.MONTH));
-        intent.putExtra("Year", calendar.get(Calendar.YEAR));
+        intent.putExtra(getString(R.string.day), calendar.get(Calendar.DAY_OF_MONTH));
+        intent.putExtra(getString(R.string.month), calendar.get(Calendar.MONTH));
+        intent.putExtra(getString(R.string.year), calendar.get(Calendar.YEAR));
         startActivityForResult(intent, 1);
 
     }

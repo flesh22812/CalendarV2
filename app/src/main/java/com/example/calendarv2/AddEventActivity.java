@@ -60,9 +60,9 @@ public class AddEventActivity extends AppCompatActivity {
         BlockEditText textWatcher = new BlockEditText(edList, btnAdd);
         for (EditText editText : edList) editText.addTextChangedListener(textWatcher);
         Intent intent = getIntent();
-        day = intent.getIntExtra("Day", 1);
-        month = intent.getIntExtra("Month", 1);
-        year = intent.getIntExtra("Year", 1970);
+        day = intent.getIntExtra(getString(R.string.day), 1);
+        month = intent.getIntExtra(getString(R.string.month), 1);
+        year = intent.getIntExtra(getString(R.string.year), 1970);
     }
 
     public void onClickSave(@NonNull View view) {
@@ -76,7 +76,7 @@ public class AddEventActivity extends AppCompatActivity {
         mRealm.executeTransactionAsync(new Realm.Transaction() {
                                            @Override
                                            public void execute(Realm realm) {
-                                               Number maxId = realm.where(Event.class).max("id");
+                                               Number maxId = realm.where(Event.class).max(getString(R.string.id));
                                                int nextId = (maxId == null) ? 1 : maxId.intValue() + 1;
                                                Event event = realm.createObject(Event.class, nextId);
                                                event.setName(editName.getText().toString());
@@ -88,7 +88,7 @@ public class AddEventActivity extends AppCompatActivity {
                 new Realm.Transaction.OnSuccess() {
                     @Override
                     public void onSuccess() {
-                        Toast.makeText(getApplicationContext(), "Сохранено", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), R.string.saved, Toast.LENGTH_SHORT).show();
                         setResult(RESULT_OK);
                         finish();
                     }
