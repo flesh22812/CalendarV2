@@ -42,7 +42,7 @@ public class AddEventActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
         this.setRequestedOrientation(SCREEN_ORIENTATION_UNSPECIFIED);
-        setTitle("Новый контакт");
+        setTitle(getString(R.string.new_contact));
         mRealm = Realm.getDefaultInstance();
         init();
     }
@@ -59,8 +59,6 @@ public class AddEventActivity extends AppCompatActivity {
         EditText[] edList = {editName};
         BlockEditText textWatcher = new BlockEditText(edList, btnAdd);
         for (EditText editText : edList) editText.addTextChangedListener(textWatcher);
-        {
-        }
         Intent intent = getIntent();
         day = intent.getIntExtra("Day", 1);
         month = intent.getIntExtra("Month", 1);

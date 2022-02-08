@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
         if (realmResultsStart.size() == 0) {
             try {
                 JSONObject jsonObject = new JSONObject(Objects.requireNonNull(JsonDataFromAssets()));
-                JSONArray jsonArray = jsonObject.getJSONArray("events");
+                JSONArray jsonArray = jsonObject.getJSONArray(getString(R.string.events));
 
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject eventData = jsonArray.getJSONObject(i);
@@ -101,14 +101,14 @@ public class MainActivity extends AppCompatActivity {
                     realm.executeTransactionAsync(new Realm.Transaction() {
                         @Override
                         public void execute(Realm realm) {
-                            Number maxId = realm.where(Event.class).max("id");
+                            Number maxId = realm.where(Event.class).max(getString(R.string.id));
                             int nextId = (maxId == null) ? 1 : maxId.intValue() + 1;
                             Event event = realm.createObject(Event.class, nextId);
                             try {
-                                event.setName(eventData.getString("name"));
-                                event.setDescription(eventData.getString("description"));
-                                event.setDateStart(eventData.getLong("date_start"));
-                                event.setDateFinish(eventData.getLong("date_finish"));
+                                event.setName(eventData.getString(getString(R.string.name)));
+                                event.setDescription(eventData.getString(getString(R.string.description)));
+                                event.setDateStart(eventData.getLong(getString(R.string.date_start)));
+                                event.setDateFinish(eventData.getLong(getString(R.string.date_finish)));
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
