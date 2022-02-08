@@ -2,7 +2,6 @@ package com.example.calendarv2;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -160,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void onClickAdd() {
 
-        Intent intent = new Intent(MainActivity.this, AddEvent.class);
+        Intent intent = new Intent(MainActivity.this, AddEventActivity.class);
         intent.putExtra("Day", calendar.get(Calendar.DAY_OF_MONTH));
         intent.putExtra("Month", calendar.get(Calendar.MONTH));
         intent.putExtra("Year", calendar.get(Calendar.YEAR));

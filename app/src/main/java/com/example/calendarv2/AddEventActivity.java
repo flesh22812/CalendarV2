@@ -22,7 +22,7 @@ import io.realm.Realm;
 import static android.content.pm.ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
 import static android.content.pm.ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED;
 
-public class AddEvent extends AppCompatActivity {
+public class AddEventActivity extends AppCompatActivity {
     EditText editDescrip, editName;
     private Button btnAdd;
     private TimePicker timePickerS;
