@@ -43,9 +43,9 @@ public class RealmAdapter extends RecyclerView.Adapter<RealmAdapter.ViewHolder> 
         }
     }
 
-    public RealmAdapter(@NonNull Context context, @NonNull List<Event> eventList) {
+    public RealmAdapter( @NonNull List<Event> eventList) {
         this.eventList = eventList;
-        this.context = context;
+
     }
 
     @NonNull

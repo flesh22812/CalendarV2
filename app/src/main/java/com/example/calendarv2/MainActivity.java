@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         this.setRequestedOrientation(SCREEN_ORIENTATION_PORTRAIT);
         init();
         checkBD();
-        realmAdapter = new RealmAdapter(getApplicationContext(), events);
+        realmAdapter = new RealmAdapter( events);
         recyclerView.setAdapter(realmAdapter);
         RealmConfiguration configuration;
         refreshList();
