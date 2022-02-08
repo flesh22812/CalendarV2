@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
     private String JsonDataFromAssets() {
         String json = null;
         try {
-            InputStream inputStream = getAssets().open("events.json");
+            InputStream inputStream = getAssets().open(getString(R.string.event_file));
             int sizeOfFile = inputStream.available();
             byte[] bufferData = new byte[sizeOfFile];
             inputStream.read(bufferData);
@@ -154,7 +154,6 @@ public class MainActivity extends AppCompatActivity {
             return true;
         } else
             return super.onOptionsItemSelected(item);
-
     }
 
     private void onClickAdd() {
@@ -164,7 +163,6 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra(getString(R.string.month), calendar.get(Calendar.MONTH));
         intent.putExtra(getString(R.string.year), calendar.get(Calendar.YEAR));
         startActivityForResult(intent, 1);
-
     }
 
     @Override

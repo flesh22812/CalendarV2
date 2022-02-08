@@ -23,6 +23,7 @@
     <string name="month">Month</string>
     <string name="year">Year</string>
     <string name="myrealm">myrealm.realm</string>
+    <string name="event_file">events.json</string>
 
 
 </resources>
