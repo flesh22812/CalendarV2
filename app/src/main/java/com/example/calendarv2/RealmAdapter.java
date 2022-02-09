@@ -82,11 +82,11 @@ public class RealmAdapter extends RecyclerView.Adapter<RealmAdapter.ViewHolder> 
             @Override
             public void onClick(View view) {
                 RealmResults<EventEntity> realmResultsStart = realm.where(EventEntity.class).between("dateStart", dateDel.getTime(), (dateDel.getTime() + 86400000)).findAll();
+                int newPosition = holder.getAdapterPosition();
                 realm.beginTransaction();
-                realmResultsStart.deleteFromRealm(position);
+                realmResultsStart.deleteFromRealm(newPosition);
                 realm.commitTransaction();
                 Toast.makeText(getApplicationContext(), "Удалено", Toast.LENGTH_SHORT).show();
-                int newPosition = holder.getAdapterPosition();
                 eventList.remove(newPosition);
                 notifyItemRemoved(newPosition);
                 notifyItemRangeChanged(newPosition, eventList.size());
