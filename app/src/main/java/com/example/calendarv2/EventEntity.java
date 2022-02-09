@@ -6,7 +6,7 @@ import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.Required;
 
-public class Event extends RealmObject {
+public class EventEntity extends RealmObject {
     @PrimaryKey
     private int id;
     private long dateStart;
@@ -16,7 +16,7 @@ public class Event extends RealmObject {
     private String name;
 
 
-    Event(int id, long dateStart, long dateFinish, String name, String description) {
+    EventEntity(int id, long dateStart, long dateFinish, String name, String description) {
         this.id = id;
         this.dateStart = dateStart;
         this.dateFinish = dateFinish;
@@ -25,7 +25,7 @@ public class Event extends RealmObject {
 
     }
 
-    public Event() {
+    public EventEntity() {
 
     }
 

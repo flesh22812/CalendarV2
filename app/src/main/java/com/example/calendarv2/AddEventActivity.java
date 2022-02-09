@@ -1,7 +1,6 @@
 package com.example.calendarv2;
 
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -19,25 +18,25 @@ import java.util.List;
 
 import io.realm.Realm;
 
-import static android.content.pm.ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
 import static android.content.pm.ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED;
 
 public class AddEventActivity extends AppCompatActivity {
-    EditText editDescrip, editName;
+    private EditText editDescrip, editName;
     private Button btnAdd;
-    private TimePicker timePickerS;
-    private TimePicker timePickerF;
-    Realm mRealm;
-    int hourStart;
-    int minuteStart;
-    int hourFinish;
-    int minuteFinish;
-    int day, month, year;
-    RecyclerView recyclerView;
-    RealmAdapter realmAdapter;
-    List<Event> events = new ArrayList<>();
+    private TimePicker timePickerS, timePickerF;
+    private Realm mRealm;
+    private int hourStart, minuteStart, hourFinish, minuteFinish;
+    private int day, month, year;
+    private RecyclerView recyclerView;
+    private RealmAdapter realmAdapter;
+    private List<EventEntity> events = new ArrayList<>();
+    private final int DEFAULT_DAY = 1;
+    private final int DEFAULT_MONTH = 1;
+    private final int DEFAULT_YEAR = 1970;
+    private final int INDEX = 1;
 
-    @Override             ///////// initialization of AddView
+    // initialization of AddView
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
@@ -60,9 +59,9 @@ public class AddEventActivity extends AppCompatActivity {
         BlockEditText textWatcher = new BlockEditText(edList, btnAdd);
         for (EditText editText : edList) editText.addTextChangedListener(textWatcher);
         Intent intent = getIntent();
-        day = intent.getIntExtra(getString(R.string.day), 1);
-        month = intent.getIntExtra(getString(R.string.month), 1);
-        year = intent.getIntExtra(getString(R.string.year), 1970);
+        day = intent.getIntExtra(getString(R.string.day), DEFAULT_DAY);
+        month = intent.getIntExtra(getString(R.string.month), DEFAULT_MONTH);
+        year = intent.getIntExtra(getString(R.string.year), DEFAULT_YEAR);
     }
 
     public void onClickSave(@NonNull View view) {
@@ -76,9 +75,9 @@ public class AddEventActivity extends AppCompatActivity {
         mRealm.executeTransactionAsync(new Realm.Transaction() {
                                            @Override
                                            public void execute(Realm realm) {
-                                               Number maxId = realm.where(Event.class).max(getString(R.string.id));
-                                               int nextId = (maxId == null) ? 1 : maxId.intValue() + 1;
-                                               Event event = realm.createObject(Event.class, nextId);
+                                               Number maxId = realm.where(EventEntity.class).max(getString(R.string.id));
+                                               int nextId = (maxId == null) ? INDEX : maxId.intValue() + INDEX;
+                                               EventEntity event = realm.createObject(EventEntity.class, nextId);
                                                event.setName(editName.getText().toString());
                                                event.setDescription(editDescrip.getText().toString());
                                                event.setDateStart(timestampS.getTime());

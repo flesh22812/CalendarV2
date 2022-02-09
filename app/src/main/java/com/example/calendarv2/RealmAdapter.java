@@ -1,7 +1,6 @@
 package com.example.calendarv2;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,29 +20,29 @@ import io.realm.RealmResults;
 import static io.realm.Realm.getApplicationContext;
 
 public class RealmAdapter extends RecyclerView.Adapter<RealmAdapter.ViewHolder> {
-    Context context;
-    List<Event> eventList;
 
-    //  private Realm mRealm;
+    List<EventEntity> eventList;
+    
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView name;
-        TextView date_start;
-        TextView date_finish;
+        TextView dateStart;
+        TextView dateFinish;
         TextView description;
         ImageView del;
         Realm realm;
 
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            name = (TextView) itemView.findViewById(R.id.listName);
-            date_start = (TextView) itemView.findViewById(R.id.listTimeS);
-            date_finish = (TextView) itemView.findViewById(R.id.listTimeF);
-            description = (TextView) itemView.findViewById(R.id.listDescrip);
+            name = itemView.findViewById(R.id.listName);
+            dateStart = itemView.findViewById(R.id.listTimeS);
+            dateFinish = itemView.findViewById(R.id.listTimeF);
+            description = itemView.findViewById(R.id.listDescrip);
             del = itemView.findViewById(R.id.imageView2);
         }
     }
 
-    public RealmAdapter( @NonNull List<Event> eventList) {
+    public RealmAdapter(@NonNull List<EventEntity> eventList) {
         this.eventList = eventList;
 
     }
@@ -62,24 +61,27 @@ public class RealmAdapter extends RecyclerView.Adapter<RealmAdapter.ViewHolder> 
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Realm realm;
         realm = Realm.getDefaultInstance();
-        Event eventData = eventList.get(position);
+        EventEntity eventData = eventList.get(position);
         Timestamp dateS = new Timestamp(Long.valueOf(eventData.getDateStart()));
         Timestamp dateF = new Timestamp(Long.valueOf(eventData.getDateFinish()));
         Timestamp dateDel = new Timestamp(dateS.getYear(), dateS.getMonth(), dateS.getDate(), 0, 0, 0, 0);
         holder.name.setText(eventData.getName());
         if (dateS.getMinutes() < 10) {
-            holder.date_start.setText(String.valueOf(dateS.getHours()) + ":0" + String.valueOf(dateS.getMinutes()));
-        } else
-            holder.date_start.setText(String.valueOf(dateS.getHours()) + ":" + String.valueOf(dateS.getMinutes()));
-        if (dateF.getMinutes() < 10)
-            holder.date_finish.setText("-" + String.valueOf(dateF.getHours()) + ":0" + String.valueOf(dateF.getMinutes()));
-        else
-            holder.date_finish.setText("-" + String.valueOf(dateF.getHours()) + ":" + String.valueOf(dateF.getMinutes()));
+            holder.dateStart.setText(String.valueOf(dateS.getHours()) + ":0" + String.valueOf(dateS.getMinutes()));
+        } else {
+            holder.dateStart.setText(String.valueOf(dateS.getHours()) + ":" + String.valueOf(dateS.getMinutes()));
+        }
+
+        if (dateF.getMinutes() < 10) {
+            holder.dateFinish.setText("-" + String.valueOf(dateF.getHours()) + ":0" + String.valueOf(dateF.getMinutes()));
+        } else {
+            holder.dateFinish.setText("-" + String.valueOf(dateF.getHours()) + ":" + String.valueOf(dateF.getMinutes()));
+        }
         holder.description.setText(eventData.getDescription());
         holder.del.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                RealmResults<Event> realmResultsStart = realm.where(Event.class).between("dateStart", dateDel.getTime(), (dateDel.getTime() + 86400000)).findAll();
+                RealmResults<EventEntity> realmResultsStart = realm.where(EventEntity.class).between("dateStart", dateDel.getTime(), (dateDel.getTime() + 86400000)).findAll();
                 realm.beginTransaction();
                 realmResultsStart.deleteFromRealm(position);
                 realm.commitTransaction();

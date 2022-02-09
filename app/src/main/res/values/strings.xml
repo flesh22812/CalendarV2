@@ -24,6 +24,8 @@
     <string name="year">Year</string>
     <string name="myrealm">myrealm.realm</string>
     <string name="event_file">events.json</string>
+    <string name="deleted">Удалено</string>
+    <string name="decoder">UTF-8</string>
 
 
 </resources>

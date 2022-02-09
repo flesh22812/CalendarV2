@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.CalendarView;
 
 import androidx.annotation.NonNull;
@@ -30,29 +29,29 @@ import io.realm.RealmConfiguration;
 import io.realm.RealmResults;
 
 import static android.content.pm.ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
+import static com.example.calendarv2.R.id;
+import static com.example.calendarv2.R.layout;
+import static com.example.calendarv2.R.string;
 
 
 public class MainActivity extends AppCompatActivity {
-    RecyclerView recyclerView;
-    ArrayList<String> name = new ArrayList<>();
-    ArrayList<String> date_start = new ArrayList<>();
-    ArrayList<String> date_finish = new ArrayList<>();
-    ArrayList<String> description = new ArrayList<>();
-    private List<Event> events = new ArrayList<>();
-    Realm realm;
-    Calendar calendar;
-    RealmAdapter realmAdapter;
+    private RecyclerView recyclerView;
+    private List<EventEntity> events = new ArrayList<>();
+    private Realm realm;
+    private Calendar calendar;
+    private RealmAdapter realmAdapter;
     private CalendarView calendarView;
+    private final int TIME_ZERO = 0, INDEX = 1, MONDAY = 2;
 
     @SuppressLint("SourceLockedOrientationActivity")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(layout.activity_main);
         this.setRequestedOrientation(SCREEN_ORIENTATION_PORTRAIT);
         init();
         checkBD();
-        realmAdapter = new RealmAdapter( events);
+        realmAdapter = new RealmAdapter(events);
         recyclerView.setAdapter(realmAdapter);
         RealmConfiguration configuration;
         refreshList();
@@ -60,40 +59,41 @@ public class MainActivity extends AppCompatActivity {
 
     private void init() {
         realm = Realm.getDefaultInstance();
-        recyclerView = findViewById(R.id.recyclerView);
-        calendarView = findViewById(R.id.calendarView);
+        recyclerView = findViewById(id.recyclerView);
+        calendarView = findViewById(id.calendarView);
         calendar = Calendar.getInstance();
-        calendarView.setFirstDayOfWeek(2);
+        calendarView.setFirstDayOfWeek(MONDAY);
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @SuppressLint("SyntheticAccessor")
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
-                calendar.set(year, month, dayOfMonth, 0, 0, 0);
+                calendar.set(year, month, dayOfMonth, TIME_ZERO, TIME_ZERO, TIME_ZERO);
                 refreshList();
             }
         });
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplication());
         recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                refreshList();
-            }
-        });
+        //   recyclerView.setOnClickListener(new View.OnClickListener() {
+        //     @Override
+        //   public void onClick(View view) {
+        //     refreshList();
+        // }
+        //});
     }
 
     public void refreshList() {
         events.clear();
-        RealmResults<Event> realmResults = realm.where(Event.class).between(getString(R.string.date_start), calendar.getTimeInMillis(), (calendar.getTimeInMillis() + 86400000)).findAll();
+        RealmResults<EventEntity> realmResults = realm.where(EventEntity.class).between(getString(string.date_start), calendar.getTimeInMillis(), (calendar.getTimeInMillis() + 86400000)).findAll();
         events.addAll(realmResults);
         realmAdapter.notifyDataSetChanged();
     }
 
     public void checkBD() {
-        RealmResults<Event> realmResultsStart = realm.where(Event.class).findAll();
+        RealmResults<EventEntity> realmResultsStart = realm.where(EventEntity.class).findAll();
         if (realmResultsStart.size() == 0) {
             try {
                 JSONObject jsonObject = new JSONObject(Objects.requireNonNull(JsonDataFromAssets()));
-                JSONArray jsonArray = jsonObject.getJSONArray(getString(R.string.events));
+                JSONArray jsonArray = jsonObject.getJSONArray(getString(string.events));
 
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject eventData = jsonArray.getJSONObject(i);
@@ -101,14 +101,14 @@ public class MainActivity extends AppCompatActivity {
                     realm.executeTransactionAsync(new Realm.Transaction() {
                         @Override
                         public void execute(Realm realm) {
-                            Number maxId = realm.where(Event.class).max(getString(R.string.id));
-                            int nextId = (maxId == null) ? 1 : maxId.intValue() + 1;
-                            Event event = realm.createObject(Event.class, nextId);
+                            Number maxId = realm.where(EventEntity.class).max(getString(string.id));
+                            int nextId = (maxId == null) ? INDEX : maxId.intValue() + INDEX;
+                            EventEntity event = realm.createObject(EventEntity.class, nextId);
                             try {
-                                event.setName(eventData.getString(getString(R.string.name)));
-                                event.setDescription(eventData.getString(getString(R.string.description)));
-                                event.setDateStart(eventData.getLong(getString(R.string.date_start)));
-                                event.setDateFinish(eventData.getLong(getString(R.string.date_finish)));
+                                event.setName(eventData.getString(getString(string.name)));
+                                event.setDescription(eventData.getString(getString(string.description)));
+                                event.setDateStart(eventData.getLong(getString(string.date_start)));
+                                event.setDateFinish(eventData.getLong(getString(string.date_finish)));
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -127,12 +127,12 @@ public class MainActivity extends AppCompatActivity {
     private String JsonDataFromAssets() {
         String json = null;
         try {
-            InputStream inputStream = getAssets().open(getString(R.string.event_file));
+            InputStream inputStream = getAssets().open(getString(string.event_file));
             int sizeOfFile = inputStream.available();
             byte[] bufferData = new byte[sizeOfFile];
             inputStream.read(bufferData);
             inputStream.close();
-            json = new String(bufferData, "UTF-8");
+            json = new String(bufferData, getString(string.decoder));
         } catch (IOException e) {
             e.printStackTrace();
             return null;
@@ -141,15 +141,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {// Supporting ActionBar
+    public boolean onCreateOptionsMenu(@NonNull Menu menu) {// Supporting ActionBar
         getMenuInflater().inflate(R.menu.menuadd, menu);
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {//Supporting Add button
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {//Supporting Add button
         // Handle item selection
-        if (item.getItemId() == R.id.action_btn) {
+        if (item.getItemId() == id.action_btn) {
             onClickAdd();
             return true;
         } else
@@ -159,14 +159,14 @@ public class MainActivity extends AppCompatActivity {
     private void onClickAdd() {
 
         Intent intent = new Intent(MainActivity.this, AddEventActivity.class);
-        intent.putExtra(getString(R.string.day), calendar.get(Calendar.DAY_OF_MONTH));
-        intent.putExtra(getString(R.string.month), calendar.get(Calendar.MONTH));
-        intent.putExtra(getString(R.string.year), calendar.get(Calendar.YEAR));
+        intent.putExtra(getString(string.day), calendar.get(Calendar.DAY_OF_MONTH));
+        intent.putExtra(getString(string.month), calendar.get(Calendar.MONTH));
+        intent.putExtra(getString(string.year), calendar.get(Calendar.YEAR));
         startActivityForResult(intent, 1);
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         refreshList();
     }
