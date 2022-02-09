@@ -6,8 +6,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class BlockEditText implements TextWatcher {
-    ///////////////////This class blocks  incorrect inputs
+public class BlockEditText implements TextWatcher {//This class blocks  incorrect inputs
+
     View v;
     EditText[] edList;
 
