@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.CalendarView;
 
 import androidx.annotation.NonNull;
@@ -34,7 +35,7 @@ import static com.example.calendarv2.R.layout;
 import static com.example.calendarv2.R.string;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements IClickDeleteListener {
     private RecyclerView recyclerView;
     private List<EventEntity> events = new ArrayList<>();
     private Realm realm;
@@ -73,12 +74,7 @@ public class MainActivity extends AppCompatActivity {
         });
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplication());
         recyclerView.setLayoutManager(linearLayoutManager);
-        //   recyclerView.setOnClickListener(new View.OnClickListener() {
-        //     @Override
-        //   public void onClick(View view) {
-        //     refreshList();
-        // }
-        //});
+
     }
 
     public void refreshList() {
@@ -86,6 +82,14 @@ public class MainActivity extends AppCompatActivity {
         RealmResults<EventEntity> realmResults = realm.where(EventEntity.class).between(getString(string.date_start), calendar.getTimeInMillis(), (calendar.getTimeInMillis() + 86400000)).findAll();
         events.addAll(realmResults);
         realmAdapter.notifyDataSetChanged();
+    }
+
+    public void deleteEvent(@NonNull View view, int id) {
+        Realm realmDelete = Realm.getDefaultInstance();
+        RealmResults<EventEntity> realmResultsStart = realmDelete.where(EventEntity.class).equalTo("id", id).findAll();
+        realmDelete.beginTransaction();
+        realmResultsStart.deleteAllFromRealm();
+        realmDelete.commitTransaction();
     }
 
     public void checkBD() {

@@ -25,6 +25,13 @@
     <string name="event_file">events.json</string>
     <string name="deleted">Удалено</string>
     <string name="decoder">UTF-8</string>
+    <string name="enter_name">Введите назание занятия</string>
+    <string name="enter_description">Введите описание занятия</string>
+    <string name="time_finish">Выберете время конца события</string>
+    <string name="add_event">Добавить занятие</string>
+    <string name="time_start">Выберете время начала события</string>
+    <string name="example_time_start">11:00</string>
+    <string name="example_time_finish">-12:00</string>
 
 
 </resources>

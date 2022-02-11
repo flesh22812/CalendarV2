@@ -15,14 +15,13 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import io.realm.Realm;
-import io.realm.RealmResults;
 
 import static io.realm.Realm.getApplicationContext;
 
 public class RealmAdapter extends RecyclerView.Adapter<RealmAdapter.ViewHolder> {
 
     List<EventEntity> eventList;
-    
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView name;
         TextView dateStart;
@@ -30,7 +29,7 @@ public class RealmAdapter extends RecyclerView.Adapter<RealmAdapter.ViewHolder> 
         TextView description;
         ImageView del;
         Realm realm;
-
+        IClickDeleteListener clickListener = new MainActivity();
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -39,6 +38,41 @@ public class RealmAdapter extends RecyclerView.Adapter<RealmAdapter.ViewHolder> 
             dateFinish = itemView.findViewById(R.id.listTimeF);
             description = itemView.findViewById(R.id.listDescrip);
             del = itemView.findViewById(R.id.imageView2);
+            del.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    clickListener.deleteEvent(view, eventList.get(getAdapterPosition()).getId());
+                    deleteEvent();
+                }
+            });
+        }
+
+        @SuppressLint("SetTextI18n")
+        public void outputEvents(@NonNull EventEntity eventData) {
+            Timestamp dateS = new Timestamp(Long.valueOf(eventData.getDateStart()));
+            Timestamp dateF = new Timestamp(Long.valueOf(eventData.getDateFinish()));
+            Timestamp dateDel = new Timestamp(dateS.getYear(), dateS.getMonth(), dateS.getDate(), 0, 0, 0, 0);
+            name.setText(eventData.getName());
+            if (dateS.getMinutes() < 10) {
+                dateStart.setText(String.valueOf(dateS.getHours()) + ":0" + String.valueOf(dateS.getMinutes()));
+            } else {
+                dateStart.setText(String.valueOf(dateS.getHours()) + ":" + String.valueOf(dateS.getMinutes()));
+            }
+
+            if (dateF.getMinutes() < 10) {
+                dateFinish.setText("-" + String.valueOf(dateF.getHours()) + ":0" + String.valueOf(dateF.getMinutes()));
+            } else {
+                dateFinish.setText("-" + String.valueOf(dateF.getHours()) + ":" + String.valueOf(dateF.getMinutes()));
+            }
+            description.setText(eventData.getDescription());
+        }
+
+        public void deleteEvent() {
+            int newPosition = getAdapterPosition();
+            Toast.makeText(getApplicationContext(), "Удалено", Toast.LENGTH_SHORT).show();
+            eventList.remove(newPosition);
+            notifyItemRemoved(newPosition);
+            notifyItemRangeChanged(newPosition, eventList.size());
         }
     }
 
@@ -51,48 +85,15 @@ public class RealmAdapter extends RecyclerView.Adapter<RealmAdapter.ViewHolder> 
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row, parent, false);
-        ImageView del = view.findViewById(R.id.imageView2);
-
         return new ViewHolder(view);
     }
 
-    @SuppressLint("SetTextI18n")
+
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Realm realm;
-        realm = Realm.getDefaultInstance();
-        EventEntity eventData = eventList.get(position);
-        Timestamp dateS = new Timestamp(Long.valueOf(eventData.getDateStart()));
-        Timestamp dateF = new Timestamp(Long.valueOf(eventData.getDateFinish()));
-        Timestamp dateDel = new Timestamp(dateS.getYear(), dateS.getMonth(), dateS.getDate(), 0, 0, 0, 0);
-        holder.name.setText(eventData.getName());
-        if (dateS.getMinutes() < 10) {
-            holder.dateStart.setText(String.valueOf(dateS.getHours()) + ":0" + String.valueOf(dateS.getMinutes()));
-        } else {
-            holder.dateStart.setText(String.valueOf(dateS.getHours()) + ":" + String.valueOf(dateS.getMinutes()));
-        }
-
-        if (dateF.getMinutes() < 10) {
-            holder.dateFinish.setText("-" + String.valueOf(dateF.getHours()) + ":0" + String.valueOf(dateF.getMinutes()));
-        } else {
-            holder.dateFinish.setText("-" + String.valueOf(dateF.getHours()) + ":" + String.valueOf(dateF.getMinutes()));
-        }
-        holder.description.setText(eventData.getDescription());
-        holder.del.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                RealmResults<EventEntity> realmResultsStart = realm.where(EventEntity.class).between("dateStart", dateDel.getTime(), (dateDel.getTime() + 86400000)).findAll();
-                int newPosition = holder.getAdapterPosition();
-                realm.beginTransaction();
-                realmResultsStart.deleteFromRealm(newPosition);
-                realm.commitTransaction();
-                Toast.makeText(getApplicationContext(), "Удалено", Toast.LENGTH_SHORT).show();
-                eventList.remove(newPosition);
-                notifyItemRemoved(newPosition);
-                notifyItemRangeChanged(newPosition, eventList.size());
-            }
-        });
+        holder.outputEvents(eventList.get(position));
     }
+
 
     @Override
     public int getItemCount() {

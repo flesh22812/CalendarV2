@@ -29,9 +29,9 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="20dp"
-                android:text="Введите назание занятия"
-                android:textColor="#000000"
-                android:textSize="18sp" />
+                android:text="@string/enter_name"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size" />
 
             <EditText
                 android:id="@+id/editName"
@@ -49,9 +49,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
-                android:text="Введите описание занятия"
-                android:textColor="#000000"
-                android:textSize="18sp" />
+                android:text="@string/enter_description"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size" />
 
             <EditText
                 android:id="@+id/editDescrip"
@@ -67,22 +67,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:text="Выберете время начала события"
-                android:textColor="#000000"
-                android:textSize="18sp" />
+                android:text="@string/time_start"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size" />
 
             <TimePicker
                 android:id="@+id/timePickerS"
                 style="@android:style/Widget.Material.Light.TimePicker"
                 android:layout_width="match_parent"
                 android:layout_height="146dp"
-                android:layout_centerHorizontal="true"
                 android:layout_marginStart="98dp"
                 android:layout_marginEnd="96dp"
-                android:amPmBackgroundColor="#E64545"
-                android:amPmTextColor="@color/purple_500"
-                android:numbersInnerTextColor="@color/purple_700"
-                android:numbersTextColor="@color/teal_700"
                 android:timePickerMode="spinner" />
 
             <TextView
@@ -92,23 +87,18 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="20dp"
-                android:text="Выберете время конца события"
-                android:textColor="#000000"
-                android:textSize="18sp" />
+                android:text="@string/time_finish"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size" />
 
             <TimePicker
                 android:id="@+id/timePickerF"
                 style="@android:style/Widget.Material.Light.TimePicker"
                 android:layout_width="match_parent"
                 android:layout_height="148dp"
-                android:layout_centerHorizontal="true"
                 android:layout_marginStart="98dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="96dp"
-                android:amPmBackgroundColor="#E64545"
-                android:amPmTextColor="@color/purple_500"
-                android:numbersInnerTextColor="@color/purple_700"
-                android:numbersTextColor="@color/teal_700"
                 android:timePickerMode="spinner" />
 
             <Button
@@ -119,7 +109,7 @@
                 android:layout_marginTop="10dp"
                 android:gravity="center"
                 android:onClick="onClickSave"
-                android:text="Добавить занятие" />
+                android:text="@string/add_event" />
 
         </LinearLayout>
     </ScrollView>

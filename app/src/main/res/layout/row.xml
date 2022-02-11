@@ -12,11 +12,10 @@
         android:id="@+id/listDescrip"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-
         android:layout_marginStart="16dp"
         android:layout_marginTop="4dp"
-        android:text="Description"
-        android:textSize="22sp"
+        android:text="@string/description"
+        android:textSize="@dimen/description_size"
         android:textStyle="italic"
         app:layout_constraintEnd_toStartOf="@+id/imageView2"
         app:layout_constraintStart_toEndOf="@+id/listTimeF"
@@ -27,8 +26,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="Name"
-        android:textSize="30sp"
+        android:text="@string/name"
+        android:textSize="@dimen/name_size"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -40,8 +39,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
-        android:text="11:00"
-        android:textSize="25sp"
+        android:text="@string/example_time_start"
+        android:textSize="@dimen/time_size"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/listDescrip"
         app:layout_constraintStart_toStartOf="parent"
@@ -53,8 +52,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:text="-12:00"
-        android:textSize="25sp"
+        android:text="@string/example_time_finish"
+        android:textSize="@dimen/time_size"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/listDescrip"
         app:layout_constraintStart_toEndOf="@+id/listTimeS"
@@ -72,8 +71,6 @@
         tools:srcCompat="@android:drawable/ic_delete"
 
         />
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
