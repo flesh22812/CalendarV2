@@ -14,22 +14,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.sql.Timestamp;
 import java.util.List;
 
-import io.realm.Realm;
-
 import static io.realm.Realm.getApplicationContext;
 
 public class RealmAdapter extends RecyclerView.Adapter<RealmAdapter.ViewHolder> {
 
-    List<EventEntity> eventList;
+    private List<EventEntity> eventList;
+    private IClickDeleteListener clickListener = new MainActivity();
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView name;
-        TextView dateStart;
-        TextView dateFinish;
-        TextView description;
-        ImageView del;
-        Realm realm;
-        IClickDeleteListener clickListener = new MainActivity();
+        private TextView name;
+        private TextView dateStart;
+        private TextView dateFinish;
+        private TextView description;
+        private ImageView del;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -39,6 +36,7 @@ public class RealmAdapter extends RecyclerView.Adapter<RealmAdapter.ViewHolder> 
             description = itemView.findViewById(R.id.listDescrip);
             del = itemView.findViewById(R.id.imageView2);
             del.setOnClickListener(new View.OnClickListener() {
+                @SuppressLint("SyntheticAccessor")
                 @Override
                 public void onClick(View view) {
                     clickListener.deleteEvent(view, eventList.get(getAdapterPosition()).getId());

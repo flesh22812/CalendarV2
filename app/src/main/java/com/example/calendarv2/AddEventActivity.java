@@ -1,5 +1,6 @@
 package com.example.calendarv2;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -19,7 +20,7 @@ import java.util.List;
 import io.realm.Realm;
 
 import static android.content.pm.ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED;
-
+// This class is for adding new event from calendar
 public class AddEventActivity extends AppCompatActivity {
     private EditText editDescrip, editName;
     private Button btnAdd;
@@ -35,7 +36,6 @@ public class AddEventActivity extends AppCompatActivity {
     private final int DEFAULT_YEAR = 1970;
     private final int INDEX = 1;
 
-    // initialization of AddView
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +46,7 @@ public class AddEventActivity extends AppCompatActivity {
         init();
     }
 
+    // initialization of AddEventActivity
     private void init() {
         editDescrip = findViewById(R.id.editDescrip);
         editName = findViewById(R.id.editName);
@@ -73,6 +74,7 @@ public class AddEventActivity extends AppCompatActivity {
         Timestamp timestampS = new Timestamp(year - 1900, month, day, hourStart, minuteStart, 0, 0);
         Timestamp timestampF = new Timestamp(year - 1900, month, day, hourFinish, minuteFinish, 0, 0);
         mRealm.executeTransactionAsync(new Realm.Transaction() {
+                                           @SuppressLint("SyntheticAccessor")
                                            @Override
                                            public void execute(Realm realm) {
                                                Number maxId = realm.where(EventEntity.class).max(getString(R.string.id));

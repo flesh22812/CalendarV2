@@ -6,26 +6,29 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.annotation.NonNull;
+
+//This class blocks  incorrect inputs
 public class BlockEditText implements TextWatcher {//This class blocks  incorrect inputs
 
-    View v;
-    EditText[] edList;
+    private View v;
+    private EditText[] edList;
 
-    public BlockEditText(EditText[] edList, Button v) {
+    public BlockEditText(@NonNull EditText[] edList, @NonNull Button v) {
         this.v = v;
         this.edList = edList;
     }
 
     @Override
-    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+    public void beforeTextChanged(@NonNull CharSequence s, int start, int count, int after) {
     }
 
     @Override
-    public void onTextChanged(CharSequence s, int start, int before, int count) {
+    public void onTextChanged(@NonNull CharSequence s, int start, int before, int count) {
     }
 
     @Override
-    public void afterTextChanged(Editable s) {
+    public void afterTextChanged(@NonNull Editable s) {
         for (EditText editText : edList) {
             if (editText.getText().toString().trim().length() <= 0) {
                 v.setEnabled(false);
