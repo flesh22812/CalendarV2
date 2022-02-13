@@ -16,7 +16,7 @@ public class MainActivityTest extends TestCase {
         RealmConfiguration configuration;
         Realm realm = Realm.getDefaultInstance();
         RealmResults<EventEntity> realmResults = realm.where(EventEntity.class).equalTo("id", 1).findAll();
-        assertEquals(realmResults.size() > 0, true);
+        assertEquals(realmResults.size() == 1 , true);
     }
 
     @After
