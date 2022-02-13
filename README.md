@@ -8,5 +8,7 @@ Open `CalendarV2\app\src\main\java\com\example\calendarv2` to see all classes.
 # Screenshots
 Main activity 
 ![image](https://user-images.githubusercontent.com/91873020/153777682-960dd83d-9762-4fd7-9f38-34f9b62d1f3e.png)
+
 Add event activity 
+
 ![image](https://user-images.githubusercontent.com/91873020/153777758-43d86601-457a-4533-877f-0964f7d4ef50.png)
