@@ -186,6 +186,9 @@ public class MainActivity extends AppCompatActivity implements IClickDeleteListe
         startActivityForResult(intent, 1);
     }
 
+    /**
+     * Getting the activity result to refresh list
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
