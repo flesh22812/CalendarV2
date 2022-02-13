@@ -6,10 +6,19 @@ import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.Required;
 
+/**
+ * Event entity description
+ */
 public class EventEntity extends RealmObject {
     @PrimaryKey
     private int id;
+    /**
+     * @param dateStart time of beginning event in timestamp format
+     */
     private long dateStart;
+    /**
+     * @param dateFinish time of endding event in timestamp format
+     */
     private long dateFinish;
     private String description;
     @Required
