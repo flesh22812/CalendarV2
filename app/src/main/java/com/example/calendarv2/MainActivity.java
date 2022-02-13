@@ -35,6 +35,9 @@ import static com.example.calendarv2.R.layout;
 import static com.example.calendarv2.R.string;
 
 
+/**
+ * Main activity of the program- calendar and recycler view.
+ */
 public class MainActivity extends AppCompatActivity implements IClickDeleteListener {
     private RecyclerView recyclerView;
     private List<EventEntity> events = new ArrayList<>();
@@ -61,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements IClickDeleteListe
     /**
      * Initializing MainActivity
      */
-    private void init() {
+    public void init() {
         realm = Realm.getDefaultInstance();
         recyclerView = findViewById(id.recyclerView);
         calendarView = findViewById(id.calendarView);
