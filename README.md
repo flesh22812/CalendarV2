@@ -7,6 +7,7 @@ Make sure you are using Java 8 in your project. If not, add below code to build.
 Open `CalendarV2\app\src\main\java\com\example\calendarv2` to see all classes.
 # Screenshots
 Main activity 
+
 ![image](https://user-images.githubusercontent.com/91873020/153777682-960dd83d-9762-4fd7-9f38-34f9b62d1f3e.png)
 
 Add event activity 
