@@ -76,11 +76,11 @@ public class EventEntity extends RealmObject {
 
     }
 
-    public void setName(String name) {
+    public void setName(@NonNull String name) {
         this.name = name;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(@NonNull String description) {
         this.description = description;
     }
 }
