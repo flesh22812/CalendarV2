@@ -58,15 +58,20 @@ public class MainActivity extends AppCompatActivity implements IClickDeleteListe
         refreshList();
     }
 
+    /**
+     * Initializing MainActivity
+     */
     private void init() {
         realm = Realm.getDefaultInstance();
         recyclerView = findViewById(id.recyclerView);
         calendarView = findViewById(id.calendarView);
         calendar = Calendar.getInstance();
         calendarView.setFirstDayOfWeek(MONDAY);
+
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @SuppressLint("SyntheticAccessor")
             @Override
+            /**This method refresh recyclerView after click on the some date  */
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
                 calendar.set(year, month, dayOfMonth, TIME_ZERO, TIME_ZERO, TIME_ZERO);
                 refreshList();
@@ -84,6 +89,9 @@ public class MainActivity extends AppCompatActivity implements IClickDeleteListe
         realmAdapter.notifyDataSetChanged();
     }
 
+    /**
+     * This method deletes event from database by id
+     */
     public void deleteEvent(@NonNull View view, int id) {
         Realm realmDelete = Realm.getDefaultInstance();
         RealmResults<EventEntity> realmResultsStart = realmDelete.where(EventEntity.class).equalTo("id", id).findAll();
@@ -92,6 +100,9 @@ public class MainActivity extends AppCompatActivity implements IClickDeleteListe
         realmDelete.commitTransaction();
     }
 
+    /**
+     * This method checks size of database, and if size==0 add data from json file
+     */
     public void checkBD() {
         RealmResults<EventEntity> realmResultsStart = realm.where(EventEntity.class).findAll();
         if (realmResultsStart.size() == 0) {
@@ -128,6 +139,9 @@ public class MainActivity extends AppCompatActivity implements IClickDeleteListe
 
     }
 
+    /**
+     * Decoding data from events.json
+     */
     private String JsonDataFromAssets() {
         String json = null;
         try {
@@ -152,7 +166,7 @@ public class MainActivity extends AppCompatActivity implements IClickDeleteListe
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {//Supporting Add button
-        // Handle item selection
+        /** Handle item selection*/
         if (item.getItemId() == id.action_btn) {
             onClickAdd();
             return true;
@@ -160,6 +174,9 @@ public class MainActivity extends AppCompatActivity implements IClickDeleteListe
             return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * This method starts AddEventActivity
+     */
     private void onClickAdd() {
 
         Intent intent = new Intent(MainActivity.this, AddEventActivity.class);

@@ -16,6 +16,9 @@ import java.util.List;
 
 import static io.realm.Realm.getApplicationContext;
 
+/**
+ * Adapter from database to recyclerview
+ */
 public class RealmAdapter extends RecyclerView.Adapter<RealmAdapter.ViewHolder> {
 
     private List<EventEntity> eventList;
@@ -28,6 +31,9 @@ public class RealmAdapter extends RecyclerView.Adapter<RealmAdapter.ViewHolder> 
         private TextView description;
         private ImageView del;
 
+        /**
+         * Initialize view components
+         */
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.listName);
@@ -36,6 +42,9 @@ public class RealmAdapter extends RecyclerView.Adapter<RealmAdapter.ViewHolder> 
             description = itemView.findViewById(R.id.listDescrip);
             del = itemView.findViewById(R.id.imageView2);
             del.setOnClickListener(new View.OnClickListener() {
+                /**
+                 * @param view  deletes event from recycle view and database
+                 */
                 @SuppressLint("SyntheticAccessor")
                 @Override
                 public void onClick(View view) {
@@ -45,6 +54,9 @@ public class RealmAdapter extends RecyclerView.Adapter<RealmAdapter.ViewHolder> 
             });
         }
 
+        /**
+         * This method outputs the events in normal style
+         */
         @SuppressLint("SetTextI18n")
         public void outputEvents(@NonNull EventEntity eventData) {
             Timestamp dateS = new Timestamp(Long.valueOf(eventData.getDateStart()));
@@ -65,6 +77,10 @@ public class RealmAdapter extends RecyclerView.Adapter<RealmAdapter.ViewHolder> 
             description.setText(eventData.getDescription());
         }
 
+        /**
+         * This method needs for the deleting events from recycle view
+         */
+        @SuppressLint("SyntheticAccessor")
         public void deleteEvent() {
             int newPosition = getAdapterPosition();
             Toast.makeText(getApplicationContext(), "Удалено", Toast.LENGTH_SHORT).show();
@@ -98,8 +114,5 @@ public class RealmAdapter extends RecyclerView.Adapter<RealmAdapter.ViewHolder> 
         return eventList.size();
     }
 
-    @Override
-    public long getItemId(int i) {
-        return i;
-    }
+
 }

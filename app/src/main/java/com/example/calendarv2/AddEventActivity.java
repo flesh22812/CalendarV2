@@ -20,7 +20,7 @@ import java.util.List;
 import io.realm.Realm;
 
 import static android.content.pm.ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED;
-// This class is for adding new event from calendar
+/** This class is for adding new event from calendar*/
 public class AddEventActivity extends AppCompatActivity {
     private EditText editDescrip, editName;
     private Button btnAdd;
@@ -31,13 +31,12 @@ public class AddEventActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RealmAdapter realmAdapter;
     private List<EventEntity> events = new ArrayList<>();
-    private final int DEFAULT_DAY = 1;
-    private final int DEFAULT_MONTH = 1;
-    private final int DEFAULT_YEAR = 1970;
-    private final int INDEX = 1;
+    /** This constants needs for default values of intent*/
+    private final int DEFAULT_YEAR = 1970, DEFAULT_DAY = 1, DEFAULT_MONTH = 1,INDEX = 1 ;
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@NonNull Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
         this.setRequestedOrientation(SCREEN_ORIENTATION_UNSPECIFIED);
@@ -46,7 +45,7 @@ public class AddEventActivity extends AppCompatActivity {
         init();
     }
 
-    // initialization of AddEventActivity
+    /** initialization of AddEventActivity */
     private void init() {
         editDescrip = findViewById(R.id.editDescrip);
         editName = findViewById(R.id.editName);
@@ -64,13 +63,14 @@ public class AddEventActivity extends AppCompatActivity {
         month = intent.getIntExtra(getString(R.string.month), DEFAULT_MONTH);
         year = intent.getIntExtra(getString(R.string.year), DEFAULT_YEAR);
     }
-
+/** This method saves data to database*/
     public void onClickSave(@NonNull View view) {
 
         hourStart = timePickerS.getHour();
         minuteStart = timePickerS.getMinute();
         hourFinish = timePickerF.getHour();
         minuteFinish = timePickerF.getMinute();
+        /**Initialize timestamp from calendar date*/
         Timestamp timestampS = new Timestamp(year - 1900, month, day, hourStart, minuteStart, 0, 0);
         Timestamp timestampF = new Timestamp(year - 1900, month, day, hourFinish, minuteFinish, 0, 0);
         mRealm.executeTransactionAsync(new Realm.Transaction() {
