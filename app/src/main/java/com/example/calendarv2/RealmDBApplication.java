@@ -9,11 +9,10 @@ import io.realm.RealmConfiguration;
  * Configuration of Realm database
  */
 public class RealmDBApplication extends Application {
-    private Object RealmConfiguration;
     /**
-     * Name of database file
+     * @param REALM_NAME name of the database file
      */
-    private final String RealmName = "myrealm.realm";
+    private final String REALM_NAME = "myrealm.realm";
 
     @Override
     public void onCreate() {
@@ -21,7 +20,7 @@ public class RealmDBApplication extends Application {
         super.onCreate();
         Realm.init(this);
         RealmConfiguration config = new RealmConfiguration.Builder()
-                .name(RealmName)
+                .name(REALM_NAME)
                 .deleteRealmIfMigrationNeeded()
                 .build();
         Realm.setDefaultConfiguration(config);

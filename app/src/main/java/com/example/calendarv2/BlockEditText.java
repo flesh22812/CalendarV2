@@ -8,7 +8,7 @@ import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 
-/**This class blocks  incorrect inputs*/
+/**@see BlockEditText blocks  incorrect inputs*/
 public class BlockEditText implements TextWatcher {
 
     private View v;

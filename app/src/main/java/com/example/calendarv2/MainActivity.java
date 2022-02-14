@@ -74,7 +74,8 @@ public class MainActivity extends AppCompatActivity implements IClickDeleteListe
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @SuppressLint("SyntheticAccessor")
             @Override
-            /**This method refresh recyclerView after click on the some date  */
+            /**@see MainActivity#init()#onSelectedDayChange(CalendarView, int, int, int)
+             *  refresh recyclerView after click on the some date  */
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
                 calendar.set(year, month, dayOfMonth, TIME_ZERO, TIME_ZERO, TIME_ZERO);
                 refreshList();
@@ -93,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements IClickDeleteListe
     }
 
     /**
-     * This method deletes event from database by id
+     * @see MainActivity#deleteEvent(View, int) deletes event from database by id
      */
     public void deleteEvent(@NonNull View view, int id) {
         Realm realmDelete = Realm.getDefaultInstance();
@@ -104,7 +105,7 @@ public class MainActivity extends AppCompatActivity implements IClickDeleteListe
     }
 
     /**
-     * This method checks size of database, and if size==0 add data from json file
+     * @see MainActivity#checkBD()  checks size of database, and if size==0 add data from json file
      */
     public void checkBD() {
         RealmResults<EventEntity> realmResultsStart = realm.where(EventEntity.class).findAll();
@@ -143,7 +144,7 @@ public class MainActivity extends AppCompatActivity implements IClickDeleteListe
     }
 
     /**
-     * Decoding data from events.json
+     * @see MainActivity#JsonDataFromAssets() Decoding data from events.json
      */
     private String JsonDataFromAssets() {
         String json = null;
@@ -178,7 +179,7 @@ public class MainActivity extends AppCompatActivity implements IClickDeleteListe
     }
 
     /**
-     * This method starts AddEventActivity
+     * @see MainActivity#onClickAdd()  starts AddEventActivity
      */
     private void onClickAdd() {
 

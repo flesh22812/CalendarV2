@@ -43,7 +43,7 @@ public class RealmAdapter extends RecyclerView.Adapter<RealmAdapter.ViewHolder> 
             del = itemView.findViewById(R.id.imageView2);
             del.setOnClickListener(new View.OnClickListener() {
                 /**
-                 * Method onClick deletes event from recycle view and database
+                 * @see RealmAdapter#ViewHolder#onClick(View)  deletes event from recycle view and database
                  */
                 @SuppressLint("SyntheticAccessor")
                 @Override
@@ -55,7 +55,7 @@ public class RealmAdapter extends RecyclerView.Adapter<RealmAdapter.ViewHolder> 
         }
 
         /**
-         * This method outputs the events in normal style
+         * @see RealmAdapter#ViewHolder#outputEvents outputs the events in normal style
          */
         @SuppressLint("SetTextI18n")
         public void outputEvents(@NonNull EventEntity eventData) {
@@ -78,7 +78,7 @@ public class RealmAdapter extends RecyclerView.Adapter<RealmAdapter.ViewHolder> 
         }
 
         /**
-         * This method needs for the deleting events from recycle view
+         * @see RealmAdapter#ViewHolder#deleteEvent needs for the deleting events from recycle view
          */
         @SuppressLint("SyntheticAccessor")
         public void deleteEvent() {

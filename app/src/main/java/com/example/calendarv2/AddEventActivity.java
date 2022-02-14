@@ -20,7 +20,7 @@ import java.util.List;
 import io.realm.Realm;
 
 import static android.content.pm.ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED;
-/** This class is for adding new event from calendar*/
+/** @see AddEventActivity is for adding new event from calendar*/
 public class AddEventActivity extends AppCompatActivity {
     private EditText editDescrip, editName;
     private Button btnAdd;
@@ -63,7 +63,7 @@ public class AddEventActivity extends AppCompatActivity {
         month = intent.getIntExtra(getString(R.string.month), DEFAULT_MONTH);
         year = intent.getIntExtra(getString(R.string.year), DEFAULT_YEAR);
     }
-/** This method saves data to database*/
+/** @see AddEventActivity#onClickSave(View)  saves data to database*/
     public void onClickSave(@NonNull View view) {
 
         hourStart = timePickerS.getHour();
