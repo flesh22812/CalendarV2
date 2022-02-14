@@ -32,7 +32,8 @@
             android:layout_marginEnd="@dimen/layout_margin_end"
             android:inputType="text"
             app:layout_constraintTop_toBottomOf="@+id/txtName"
-            tools:text="@tools:sample/us_phones" />
+            tools:text="@tools:sample/us_phones"
+            tools:ignore="Autofill,LabelFor" />
 
         <TextView
             android:id="@+id/txtDescrip"
@@ -42,7 +43,8 @@
             android:layout_marginEnd="@dimen/layout_margin_end"
             android:text="@string/enter_description"
             android:textColor="@color/black"
-            android:textSize="@dimen/text_size" />
+            android:textSize="@dimen/text_size"
+            tools:ignore="UnusedIds" />
 
         <EditText
             android:id="@+id/editDescrip"
@@ -51,10 +53,10 @@
             android:layout_marginStart="@dimen/layout_margin_start"
             android:layout_marginEnd="@dimen/layout_margin_end"
             android:inputType="text"
-            tools:text="@tools:sample/us_phones" />
+            tools:text="@tools:sample/us_phones"
+            tools:ignore="Autofill" />
 
         <TextView
-            android:id="@+id/txtTimeStart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/layout_margin_start"
@@ -73,7 +75,6 @@
             android:timePickerMode="spinner" />
 
         <TextView
-            android:id="@+id/txtTimeFinish"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/layout_text_height"
             android:layout_marginStart="@dimen/layout_margin_start"

@@ -6,7 +6,7 @@
             android:layout_marginEnd="4dp"
             android:icon="@android:drawable/ic_menu_add"
             android:orderInCategory="1"
-            android:title="Add"
+            android:title="@string/add"
             myapp:actionViewClass="android."
             myapp:showAsAction="always" />
 

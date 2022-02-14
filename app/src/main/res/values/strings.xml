@@ -1,14 +1,6 @@
 <resources>
     <string name="app_name">CalendarV2</string>
-    <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
-
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 
     <string name="new_contact">Новый контакт</string>
     <string name="events">events</string>
@@ -23,7 +15,6 @@
     <string name="month">Month</string>
     <string name="year">Year</string>
     <string name="event_file">events.json</string>
-    <string name="deleted">Удалено</string>
     <string name="decoder">UTF-8</string>
     <string name="enter_name">Введите назание занятия</string>
     <string name="enter_description">Введите описание занятия</string>
@@ -32,6 +23,7 @@
     <string name="time_start">Выберете время начала события</string>
     <string name="example_time_start">11:00</string>
     <string name="example_time_finish">-12:00</string>
+    <string name="add">Add</string>
 
 
 </resources>
