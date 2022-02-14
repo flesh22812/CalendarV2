@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,111 +8,102 @@
     android:orientation="vertical">
 
 
-
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/txtName"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/layout_text_height"
+            android:layout_marginStart="@dimen/layout_margin_start"
+            android:layout_marginTop="@dimen/layout_margin_top"
+            android:layout_marginEnd="@dimen/layout_margin_end"
+            android:text="@string/enter_name"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size" />
+
+        <EditText
+            android:id="@+id/editName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_marginStart="@dimen/layout_margin_start"
+            android:layout_marginEnd="@dimen/layout_margin_end"
+            android:inputType="text"
+            app:layout_constraintTop_toBottomOf="@+id/txtName"
+            tools:text="@tools:sample/us_phones" />
 
-            <TextView
-                android:id="@+id/txtName"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="20dp"
-                android:text="@string/enter_name"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_size" />
+        <TextView
+            android:id="@+id/txtDescrip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/layout_margin_start"
+            android:layout_marginEnd="@dimen/layout_margin_end"
+            android:text="@string/enter_description"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size" />
 
-            <EditText
-                android:id="@+id/editName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                android:inputType="text"
-                app:layout_constraintTop_toBottomOf="@+id/txtName"
-                tools:text="@tools:sample/us_phones" />
+        <EditText
+            android:id="@+id/editDescrip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/layout_margin_start"
+            android:layout_marginEnd="@dimen/layout_margin_end"
+            android:inputType="text"
+            tools:text="@tools:sample/us_phones" />
 
-            <TextView
-                android:id="@+id/txtDescrip"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                android:text="@string/enter_description"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_size" />
+        <TextView
+            android:id="@+id/txtTimeStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/layout_margin_start"
+            android:text="@string/time_start"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size" />
 
-            <EditText
-                android:id="@+id/editDescrip"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                android:inputType="text"
-                tools:text="@tools:sample/us_phones" />
+        <TimePicker
+            android:id="@+id/timePickerS"
+            style="@android:style/Widget.Material.Light.TimePicker"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_time_picker"
+            android:layout_marginStart="@dimen/margin_time_picker"
+            android:layout_marginTop="@dimen/layout_margin_top"
+            android:layout_marginEnd="@dimen/margin_time_picker"
+            android:timePickerMode="spinner" />
 
-            <TextView
-                android:id="@+id/txtTimeStart"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:text="@string/time_start"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_size" />
+        <TextView
+            android:id="@+id/txtTimeFinish"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/layout_text_height"
+            android:layout_marginStart="@dimen/layout_margin_start"
+            android:layout_marginTop="@dimen/layout_margin_top"
+            android:layout_marginEnd="@dimen/layout_margin_end"
+            android:text="@string/time_finish"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size" />
 
-            <TimePicker
-                android:id="@+id/timePickerS"
-                style="@android:style/Widget.Material.Light.TimePicker"
-                android:layout_width="match_parent"
-                android:layout_height="146dp"
-                android:layout_marginStart="98dp"
-                android:layout_marginEnd="96dp"
-                android:timePickerMode="spinner" />
+        <TimePicker
+            android:id="@+id/timePickerF"
+            style="@android:style/Widget.Material.Light.TimePicker"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_time_picker"
+            android:layout_marginStart="@dimen/margin_time_picker"
+            android:layout_marginTop="@dimen/layout_margin_top"
+            android:layout_marginEnd="@dimen/margin_time_picker"
+            android:timePickerMode="spinner" />
 
-            <TextView
-                android:id="@+id/txtTimeFinish"
-                android:layout_width="wrap_content"
-                android:layout_height="34dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="20dp"
-                android:text="@string/time_finish"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_size" />
+        <Button
+            android:id="@+id/btnAdd"
+            android:layout_width="@dimen/button_width"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/layout_margin_top"
+            android:gravity="center"
+            android:onClick="onClickSave"
+            android:text="@string/add_event" />
 
-            <TimePicker
-                android:id="@+id/timePickerF"
-                style="@android:style/Widget.Material.Light.TimePicker"
-                android:layout_width="match_parent"
-                android:layout_height="148dp"
-                android:layout_marginStart="98dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="96dp"
-                android:timePickerMode="spinner" />
-
-            <Button
-                android:id="@+id/btnAdd"
-                android:layout_width="230dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:gravity="center"
-                android:onClick="onClickSave"
-                android:text="@string/add_event" />
-
-        </LinearLayout>
-    </ScrollView>
+    </LinearLayout>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
