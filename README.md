@@ -1,5 +1,4 @@
 # CalendarV2
-Test calendar for Simbiroft
 This Calendar is a simple app, which have some funcions: like adding and removing events from calendar.
 You can click on some date to see events on this day.
 # How to use?
